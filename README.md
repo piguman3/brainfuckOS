@@ -48,4 +48,6 @@ To run programs from the bin folder, you can type their name without their filet
 
 To run programs relative to the current folder the filetype needs to be included. `bin/mv.bf filea fileb`
 
+This repository is licensed under the MIT License found in the LICENSE file in the root directory.
+
 #### For more examples you can check out the base programs the OS comes with.
