@@ -5,7 +5,7 @@ f(print, "Special thanks to:\n\n");
 f(print, "MCCM--------------\n");
 f(print, "Sammycraft\n");
 f(print, "Hypergenome\n");
-f(print, "JackMacWindows\n");
+f(print, "JackMacWindows - 'men'\n");
 f(print, "foxgirl\n");
 f(print, "SolarNight\n");
 f(print, "Hakimen - ':3'\n");
