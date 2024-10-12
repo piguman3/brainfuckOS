@@ -1,5 +1,5 @@
 # BoluDOS
-The words "boludo" and "pelotudo" have their origin in the gaucho war, when the common soldiers were sent to fight against the raiders, the boludo was sent first, who handled a boleadora made of three or four balls the size of a tennis ball, and in second place went the pelotudo, with a boleadora made of two larger balls. This is what I have always heard and the veracity of this should be verified. It is assumed that in "La Guerra Gaucha" by Leopoldo Lugones, there is a reference to this.
+"The words "boludo" and "pelotudo" have their origin in the gaucho war, when the common soldiers were sent to fight against the raiders, the boludo was sent first, who handled a boleadora made of three or four balls the size of a tennis ball, and in second place went the pelotudo, with a boleadora made of two larger balls." - https://etimologias.dechile.net/?boludo
 
 BoluDOS' name is a combination of the words "boludo" and "DOS", or "Disk Operating System", as it is a [ComputerCraft operating system](https://www.egr.msu.edu/~bruienne/on-writing-an-os.pdf) which can interact with the disk of the machine.
 
