@@ -9,7 +9,7 @@ int currentDir[DIR_SIZE];
 //Set position to 1, 1, print motd
 clearScreen();
 setCursorPos(0, 0);
-f(print, "BoluDOS +.\nFoots be damned\n");
+f(print, "BoluDOS -[----->+<]>--.\nFoots be damned\n");
 
 //Commands
 int CD[] = "cd";
