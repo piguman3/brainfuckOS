@@ -27,3 +27,21 @@ The OS file structure is: (There is currently no installer to set it up)
 The Brainfuck side of the OS interacts with the CC side by using syscalls. Those are described on this wiki page: https://piguman3.github.io/boludos/syscalls.html
 
 To use the OS, replicate the file structure, copying all the files to a CC compatible system, and run `bfk main.bf` to launch the main shell.
+
+## How do I compile programs for this?
+Here's a couple of steps: (Using Linux/WSL)
+1. git clone this repo
+2. git clone the c2bf repo
+To compile the OS, simply run `make`.
+To add your own programs, create a new C source file, go to the Make file and add your C source file's name to the list of sources to compile.
+c2bf syntax is weird, so I recommend looking at example code (specially for for loops and variable types)
+Here's some example code for a program that prints "Hello world":
+```c
+#include "lib.h"
+#include "syslib.h"
+
+f(print, "Hello world\n"); // Uses a macro because strings can't be used as function arguments in c2bf
+```
+To run programs from the bin folder, you can type their name without their filetype. `mv filea fileb`
+To run programs relative to the current folder the filetype needs to be included. `bin/mv.bf filea fileb`
+#### For more examples you can check out the base programs the OS comes with.
