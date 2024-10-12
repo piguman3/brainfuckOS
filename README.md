@@ -8,7 +8,7 @@ The repo is called "brainfuckOS" because this OS is based around the popular eso
 Currently, the OS is *not really* an operating system, as it still runs on top of CraftOS, but in the future a bios will be made to run using [UnBios](https://gist.github.com/MCJack123/42bc69d3757226c966da752df80437dc) so it can be a completely independent OS.
 
 The OS file structure is: (There is currently no installer to set it up)
-```
+```bash
 .
 └── /
     ├── bfroot/ # Root of the system
