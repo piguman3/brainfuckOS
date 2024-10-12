@@ -8,7 +8,7 @@ f(print, "Hypergenome\n");
 f(print, "JackMacWindows\n");
 f(print, "foxgirl\n");
 f(print, "SolarNight\n\n");
-f(print, "Hakimen - ':fire:'\n");
+f(print, "Hakimen - ':3'\n");
 f(print, "9551dev - 'meow'\n");
 f(print, "Petrak's mods-----\n");
 f(print, "Chloe\n");
