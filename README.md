@@ -29,7 +29,7 @@ The OS file structure is:
 ```
 The Brainfuck side of the OS interacts with the CC side by using syscalls. Those are described on this wiki page: https://piguman3.github.io/boludos/syscalls.html
 
-To use the OS:
+## Installation:
 
 Replicate the file structure, copying all the files to a CC compatible system, and run `bfk main.bf` to launch the main shell.
 
