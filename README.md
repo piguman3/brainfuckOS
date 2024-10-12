@@ -43,7 +43,8 @@ Use the installer on pinestore: https://pinestore.cc/projects/120/boludos
 ## How do I compile programs for this?
 Here's a couple of steps: (Using Linux/WSL)
 1. git clone this repo
-2. git clone the c2bf repo into your clone of this repo
+2. git clone the [c2bf repo](https://github.com/arthaud/c2bf) into your clone of this repo
+3. Follow the instructions on the [c2bf repo]([url](https://github.com/arthaud/c2bf)) on how to build the binary
    
 To compile the OS, simply run `make`.
 
