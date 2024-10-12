@@ -2,7 +2,7 @@ CC = c2bf/c2bf.native
 CPP = cpp
 PROCESSED = preprocessed.c
 
-PROJECT_SOURCE_FILES ?= main.c mkdir.c del.c read.c cp.c mv.c write.c screenfetch.c append.c
+PROJECT_SOURCE_FILES ?= main.c mkdir.c del.c read.c cp.c mv.c write.c screenfetch.c append.c thanks.c
 
 RESULTS = $(patsubst %.c, out/%.bf, $(PROJECT_SOURCE_FILES))
 

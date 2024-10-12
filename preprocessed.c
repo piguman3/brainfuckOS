@@ -183,14 +183,15 @@ void deletePath(int[] currentDir, int[] string) {
     syssend(string);
     sysend();
 }
-int currentDir[128];
-getArg(1, currentDir, 128);
-int text[128];
-getArg(3, text, 128);
-int filename[128];
-getArg(2, filename, 128);
-if (text[0]!=0 && filename[0]!=0) {
-    int file = fsopen(currentDir, filename, 'a', 'b');
-    fswrite(file, text);
-    fsclose(file);
-}
+int temp_macro_var4[] = "Special thanks to:\n\n";print(temp_macro_var4);
+int temp_macro_var5[] = "MCCM--------------\n";print(temp_macro_var5);
+int temp_macro_var6[] = "Sammycraft\n";print(temp_macro_var6);
+int temp_macro_var7[] = "Hypergenome\n";print(temp_macro_var7);
+int temp_macro_var8[] = "JackMacWindows\n";print(temp_macro_var8);
+int temp_macro_var9[] = "foxgirl\n";print(temp_macro_var9);
+int temp_macro_var10[] = "SolarNight\n\n";print(temp_macro_var10);
+int temp_macro_var11[] = "Petrak's mods-----\n";print(temp_macro_var11);
+int temp_macro_var12[] = "Chloe\n";print(temp_macro_var12);
+int temp_macro_var13[] = "ElNico56\n\n";print(temp_macro_var13);
+int temp_macro_var14[] = "arthaud, the creator of c2bf\n";print(temp_macro_var14);
+int temp_macro_var15[] = "And of course, you! :]\n";print(temp_macro_var15);
