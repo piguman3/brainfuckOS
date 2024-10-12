@@ -1,4 +1,5 @@
 # BoluDOS
+
 "The words "boludo" and "pelotudo" have their origin in the gaucho war, when the common soldiers were sent to fight against the raiders, the boludo was sent first, who handled a boleadora made of three or four balls the size of a tennis ball, and in second place went the pelotudo, with a boleadora made of two larger balls." - https://etimologias.dechile.net/?boludo
 
 BoluDOS' name is a combination of the words "boludo" and "DOS", or "Disk Operating System", as it is a [ComputerCraft operating system](https://www.egr.msu.edu/~bruienne/on-writing-an-os.pdf) which can interact with the disk of the machine.
@@ -6,6 +7,8 @@ BoluDOS' name is a combination of the words "boludo" and "DOS", or "Disk Operati
 The repo is called "brainfuckOS" because this OS is based around the popular esolang "Brainfuck". The source code of the kernel/interpreter is written in Lua, with the OS being written in C, which is compiled to Brainfuck using [c2bf](https://github.com/arthaud/c2bf).
 
 Currently, the OS is *not really* an operating system, as it still runs on top of CraftOS, but in the future a bios will be made to run using [UnBios](https://gist.github.com/MCJack123/42bc69d3757226c966da752df80437dc) so it can be a completely independent OS.
+
+#### The current version of the OS is "BoluDOS +."
 
 The OS file structure is: (There is currently no installer to set it up)
 ```bash
