@@ -37,6 +37,9 @@ OR
 
 Use the installer on pinestore: https://pinestore.cc/projects/120/boludos
 
+## Screenfetch demo
+![boludos demo](https://github.com/user-attachments/assets/d0ee35f5-c73a-4ceb-988d-25b82b267869)
+
 ## How do I compile programs for this?
 Here's a couple of steps: (Using Linux/WSL)
 1. git clone this repo
