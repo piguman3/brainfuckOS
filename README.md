@@ -43,5 +43,7 @@ Here's some example code for a program that prints "Hello world":
 f(print, "Hello world\n"); // Uses a macro because strings can't be used as function arguments in c2bf
 ```
 To run programs from the bin folder, you can type their name without their filetype. `mv filea fileb`
+
 To run programs relative to the current folder the filetype needs to be included. `bin/mv.bf filea fileb`
+
 #### For more examples you can check out the base programs the OS comes with.
