@@ -31,8 +31,10 @@ To use the OS, replicate the file structure, copying all the files to a CC compa
 ## How do I compile programs for this?
 Here's a couple of steps: (Using Linux/WSL)
 1. git clone this repo
-2. git clone the c2bf repo
+2. git clone the c2bf repo into your clone of this repo
+   
 To compile the OS, simply run `make`.
+
 To add your own programs, create a new C source file, go to the Make file and add your C source file's name to the list of sources to compile.
 c2bf syntax is weird, so I recommend looking at example code (specially for for loops and variable types)
 Here's some example code for a program that prints "Hello world":
