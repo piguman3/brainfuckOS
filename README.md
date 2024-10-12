@@ -10,7 +10,7 @@ Currently, the OS is *not really* an operating system, as it still runs on top o
 
 #### The current version of the OS is "BoluDOS +."
 
-The OS file structure is: (There is currently no installer to set it up)
+The OS file structure is:
 ```bash
 .
 └── /
@@ -30,6 +30,8 @@ The OS file structure is: (There is currently no installer to set it up)
 The Brainfuck side of the OS interacts with the CC side by using syscalls. Those are described on this wiki page: https://piguman3.github.io/boludos/syscalls.html
 
 To use the OS, replicate the file structure, copying all the files to a CC compatible system, and run `bfk main.bf` to launch the main shell.
+OR
+Use the installer on pinestore: https://pinestore.cc/projects/120/boludos
 
 ## How do I compile programs for this?
 Here's a couple of steps: (Using Linux/WSL)
