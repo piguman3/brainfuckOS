@@ -175,4 +175,13 @@ void deletePath(int[] currentDir, int[] string) {
     sysend();
 }
 
+bool fsexistsfile(int[] name, int[] currentDir) {
+    f(syssend, "EFIL");
+    syssend(currentDir);
+    syssend(name);
+    sysend();
+    bool ret = read_char()==1;
+    return ret;
+}
+
 #endif
