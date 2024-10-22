@@ -215,7 +215,7 @@ local syscalls = { --4 chars for each syscall
         local fileb = string:sub(fstringsize + 1, -1)
         fs.copy(root .. filea, root .. fileb)
     end,
-    ["FMOV"] = function(args) --Make directory
+    ["FMOV"] = function(args) --Move file
         local fstringsize = args[1]
         local string = tabletostr(args):sub(2, -1)
         local filea = string:sub(1, fstringsize)
