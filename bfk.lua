@@ -178,7 +178,7 @@ local syscalls = { --4 chars for each syscall
     end,
     ["GTLS"] = function(args) --Get file in index of directory
         local sarg = tabletostr(args)
-        local fileindex = args[1] or 1
+        local fileindex = (args[1] or 0) + 1
         local dirpath = root .. sarg:sub(2, -1)
         local file = fs.list(dirpath)[fileindex]
         if file then

@@ -71,7 +71,7 @@ int fslist1dir(int[] name) {
 
 void fsgetindex(int[] currentDir, int index, int[] out, int size) {
     f(syssend, "GTLS");
-    write_char(index+1);
+    write_char(index);
     syssend(currentDir);
     sysend();
     sysread(out, size);
