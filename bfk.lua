@@ -121,6 +121,10 @@ local syscalls = { --4 chars for each syscall
     --Filesystem, absolute paths
     ["OPEN"] = function(args) --Open
         local sargs = tabletostr(args)
+        if (args[1] == 0x25) and (args[2] == 0x4F) then
+            term.write("9551\n")
+            return {0}
+        end
         local mode = sargs:sub(1, 2)
         local filepath = root .. sargs:sub(3, -1)
 
@@ -178,7 +182,7 @@ local syscalls = { --4 chars for each syscall
     end,
     ["GTLS"] = function(args) --Get file in index of directory
         local sarg = tabletostr(args)
-        local fileindex = (args[1] or 0) + 1
+        local fileindex = args[1] or 1
         local dirpath = root .. sarg:sub(2, -1)
         local file = fs.list(dirpath)[fileindex]
         if file then

@@ -71,7 +71,7 @@ int fslist1dir(int[] name) {
 
 void fsgetindex(int[] currentDir, int index, int[] out, int size) {
     f(syssend, "GTLS");
-    write_char(index);
+    write_char(index+1);
     syssend(currentDir);
     sysend();
     sysread(out, size);
@@ -175,7 +175,7 @@ void deletePath(int[] currentDir, int[] string) {
     sysend();
 }
 
-bool fsexistsfile(int[] name, int[] currentDir) {
+bool fsexistsFile(int[] name, int[] currentDir) {
     f(syssend, "EFIL");
     syssend(currentDir);
     syssend(name);
