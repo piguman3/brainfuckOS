@@ -351,14 +351,12 @@ local instructions = {
         PC = PC + metacode[PC]-1
     end,
     ["+"] = function()
-        memory[ptr] = memory[ptr] + metacode[PC]%256
+        memory[ptr] = (memory[ptr] + metacode[PC])%256
         PC = PC + metacode[PC]-1
-        if (memory[ptr]>255) then memory[ptr] = memory[ptr]%256 end
     end,
     ["-"] = function()
-        memory[ptr] = memory[ptr] - metacode[PC]%256
+        memory[ptr] = (memory[ptr] - metacode[PC])%256
         PC = PC + metacode[PC]-1
-        if (memory[ptr]<0) then memory[ptr] = memory[ptr]%256 end
     end,
     ["."] = function() --MAKE A SYSCALL
         -- Debug 
