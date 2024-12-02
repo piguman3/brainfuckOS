@@ -4,7 +4,7 @@ if not programfile then
     print("Error opening file "..global_args[1])
     return
 end
-local program = programfile.readAll()
+local program = programfile.readAll():gsub("[^(><+-.,%[%])]", "")
 programfile.close()
 
 local root = "/bfroot/"
@@ -360,7 +360,7 @@ local instructions = {
     end,
     ["."] = function() --MAKE A SYSCALL
         -- Debug 
-        --print(string.char(memory[ptr]))
+        -- print(string.char(memory[ptr]))
         table.insert(currentcall, memory[ptr])
         if (#currentcall>=syscallsize) then
             if (calltype==-1) then
