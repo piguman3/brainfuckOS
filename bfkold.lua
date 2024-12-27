@@ -4,7 +4,6 @@ if not programfile then
     print("Error opening file "..global_args[1])
     return
 end
-local interpreter = "bfkjit.lua"
 local program = programfile.readAll():gsub("[^(><+-.,%[%])]", "")
 programfile.close()
 
@@ -200,7 +199,7 @@ local syscalls = { --4 chars for each syscall
     ["EXEC"] = function(args) --Execute file with interpreter
         local ok, err = pcall(
             function()
-                loadfile(interpreter)(root .. tabletostr(args), table.unpack(exeargs))
+                loadfile("bfk.lua")(root .. tabletostr(args), table.unpack(exeargs))
             end
         )
         if not ok then
@@ -273,7 +272,7 @@ local syscalltype = { --Maps if syscall should perform with a null char or a siz
     ["SIZE"] = false,
     ["LSSZ"] = false,
     ["GTLS"] = false,
-    ["EXEC"] = false,
+    ["EXEC"] = false, --TODO: implement this
     ["MDIR"] = false,
     ["DELF"] = false,
     ["WRTE"] = false,
@@ -300,64 +299,68 @@ local function dosyscall(syscallname)
     currentcall = {}
 end
 
---[[
-function env:
-    - p variable for "pointer"
-    - m variable for "memory"
-    - , calls "i", sets m[p]
-    - . calls "o", uses m[p]
---]]
-
 local supported = "><+-.,"
 local code = {}
 local metacode = {}
 local cptr = 0
-local counter = 0
-while cptr<#program do
+while cptr<#program+1 do
     cptr = cptr + 1
-    counter = counter + 1
     local char = program:sub(cptr,cptr)
     code[cptr] = string.byte(char)
     local sptr = cptr
-    if code[cptr] == string.byte("[") then --[
-        metacode[counter] = "while m[p]~=0 do"
-    elseif code[cptr] == string.byte("]") then --]
-        metacode[counter] = "end"
-    elseif code[cptr] == string.byte(",") then
-        metacode[counter] = "i(m, p)"
-    elseif code[cptr] == string.byte(".") then
-        metacode[counter] = "o(m, p)"
+    if code[cptr] == 0x5B then --[
+        local t = 0
+        for x=cptr+1,#program do
+            if (program:sub(x,x)=="[") then t = t + 1 end --[
+            if (program:sub(x,x)=="]") then t = t - 1 end --]
+            if (t<0) then sptr = x; break end
+        end
+        metacode[cptr] = sptr
+    elseif code[cptr] == 0x5D then --]
+        local t = 0
+        for x=cptr-1,1,-1 do
+            if (program:sub(x,x)=="[") then t = t - 1 end --[
+            if (program:sub(x,x)=="]") then t = t + 1 end --]
+            if (t<0) then sptr = x; break end
+        end
+        metacode[cptr] = sptr
     else
-        code[cptr] = string.byte(char)
-        local sptr = cptr
-        while (program:sub(sptr,sptr)==char) do 
-            sptr = sptr + 1 
+        for y=1,#supported do
+            if char == supported:sub(y,y) then
+                code[cptr] = string.byte(char)
+                local sptr = cptr
+                while (program:sub(sptr,sptr)==char) do 
+                    sptr = sptr + 1 
+                    code[sptr] = string.byte(char)
+                end
+                metacode[cptr] = sptr-cptr
+                cptr = sptr-1
+                break
+            end
         end
-        local dif = sptr-cptr
-        if (code[cptr]==string.byte("+")) then
-            metacode[counter] = "m[p]=(m[p]+" .. dif .. ")%256"
-        elseif (code[cptr]==string.byte("-")) then
-            metacode[counter] = "m[p]=(m[p]-" .. dif .. ")%256"
-        elseif (code[cptr]==string.byte(">")) then
-            metacode[counter] = "p=p+" .. dif
-        elseif (code[cptr]==string.byte("<")) then
-            metacode[counter] = "p=p-" .. dif
-        end
-        cptr = sptr-1
     end
 end
 
-local globals = {
-    m = memory,
-    p = ptr,
-    o = function(memory, ptr) --MAKE A SYSCALL
+local instructions = {
+    [">"] = function()
+        ptr = ptr + metacode[PC]
+        PC = PC + metacode[PC]-1
+    end,
+    ["<"] = function() 
+        ptr = ptr - metacode[PC]
+        PC = PC + metacode[PC]-1
+    end,
+    ["+"] = function()
+        memory[ptr] = (memory[ptr] + metacode[PC])%256
+        PC = PC + metacode[PC]-1
+    end,
+    ["-"] = function()
+        memory[ptr] = (memory[ptr] - metacode[PC])%256
+        PC = PC + metacode[PC]-1
+    end,
+    ["."] = function() --MAKE A SYSCALL
         -- Debug 
-        -- for k,v in pairs(memory) do
-        --     if v~=0 then
-        --         print(k, string.char(v))
-        --     end
-        -- end
-        -- print(ptr, memory[ptr])
+        -- print(string.char(memory[ptr]))
         table.insert(currentcall, memory[ptr])
         if (#currentcall>=syscallsize) then
             if (calltype==-1) then
@@ -380,16 +383,44 @@ local globals = {
             end
         end
     end,
-    i = function(memory, ptr) --GET RETURN OF SYSCALL
+    [","] = function() --GET RETURN OF SYSCALL
         memory[ptr] = currentreturn[1] or 0
         table.remove(currentreturn, 1) --Pop character from the return value
+    end,
+    ["["] = function()
+        if (memory[ptr] == 0) then
+            PC = metacode[PC]
+        end
+    end,
+    ["]"] = function()
+        if (memory[ptr] ~= 0) then
+            PC = metacode[PC]
+        end
     end
 }
 
-local concatmetacode = table.concat(metacode, "\n")
+local width = term.getSize()
+local loading = {"\\", "|", "/", "-"}
 
-
-local code,err = loadstring(concatmetacode)
-
-local brainload = setfenv(code, globals)
-brainload() --Run compiled bf code
+local starttime = os.epoch("utc")
+local cycle = 0
+while 1 do
+    PC = PC + 1
+    cycle = cycle + 1
+    if PC>#program then
+        --print("Time taken: " .. tostring(os.epoch("utc") - starttime))
+        return
+    end
+    local inst = string.char(code[PC])
+    --print(PC)
+    --read()
+    if (cycle%200000)==0 then
+        local oldx, oldy = term.getCursorPos()
+        term.setCursorPos(width, 1)
+        term.write(loading[(cycle/200000)%4+1])
+        term.setCursorPos(oldx, oldy)
+    end
+    if instructions[inst] then
+        instructions[inst]()
+    end
+end
