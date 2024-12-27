@@ -4,7 +4,7 @@ if not programfile then
     print("Error opening file "..global_args[1])
     return
 end
-local interpreter = "bfkjit.lua"
+local interpreter = "bfk.lua"
 local program = programfile.readAll():gsub("[^(><+-.,%[%])]", "")
 programfile.close()
 
